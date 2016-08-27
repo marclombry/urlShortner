@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bootstrap 101 Template</title>
-
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -18,8 +16,6 @@
     <![endif]-->
   </head>
   <body>
-
-
     <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -53,39 +49,28 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
       <div class="container theme-showcase" role="main">
-
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Theme example</h1>
         <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
       </div>
-    
     <div class="container">
       <h2>URL SHORTNER</h2>
-      <form>
-       
+      <form method="POST" action="traitement.php">
         <div class="form-group">
           <label for="url">URL:</label>
           <input type="url" class="form-control" id="url" placeholder="Enter un url">
         </div>
-    
-        
         </div>
         <button type="submit" class="btn btn-default">Envoyer</button>
       </form>
     </div>
-    
-
     <div class="container">
-      <?php 
-
-  $bdd = new PDO('mysql:host=localhost;port=3307;dbname=urlbase', 'root', '');   
-  var_dump($bdd);
-
-  $requete = $bdd->query("SELECT * FROM urls");
-?>       
+        <?php
+            $bdd = new PDO('mysql:host=localhost;port=3307;dbname=urlbase', 'root', '');
+            $requete = $bdd->query("SELECT * FROM urls");
+        ?>       
       <table class="table">
         <thead>
           <tr>
