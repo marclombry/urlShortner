@@ -1,4 +1,21 @@
-<?php require_once('config.php'); ?>
+<?php require_once('config.php');
+
+// je verfie que lutilisateur a bien demander une url
+
+// je verifie dans ma base de donnée si ce code correspondant a une url existe
+
+// si il existe, je recupere l'url original(['url']), sinon je ne fait rien.
+    if(isset($_GET['url_genere'])){
+        $requete = "SELECT url FROM urls WHERE url_genere = '".$_GET['url_genere']."'";
+        $exec = $bdd->query($requete);
+        $resultat = $exec->fetch();
+
+        if (isset($resultat['url'])){
+            header('Location: ' . $resultat['url']);
+        }
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,41 +34,7 @@
     <![endif]-->
 </head>
 <body>
-<!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Bootstrap theme</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
+
 
 <div class="container theme-showcase" role="main">
     <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -66,10 +49,10 @@
         <form method="POST" action="traitement.php">
             <div class="form-group">
                 <label for="url">URL:</label>
-                <input type="url" class="form-control" id="url" placeholder="Enter un url">
+                <input type="url" name='url' class="form-control" id="url" placeholder="Enter un url">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-default">Envoyer</button>
+                <button type="submit" name="submit" class="btn btn-default">Envoyer</button>
             </div>
         </form>
     </div>
@@ -93,7 +76,9 @@
         <?php foreach ($requete->fetchAll() as $resultat) { ?>
             <tr class="success">
                 <td><?php echo $resultat['url'] ?></td>
-                <td><?php echo $resultat['url_genere'] ?></td>
+                <td>
+                    <a href="http://localhost/urlShortner/?url_genere=<?php echo $resultat['url_genere'] ?>"><?php echo $resultat['url_genere'] ?></a>
+                <td>
                 <td><?php echo $resultat['clicks'] ?></td>
             </tr>
         <?php } ?>
