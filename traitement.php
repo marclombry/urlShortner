@@ -16,7 +16,7 @@ if(isset($_POST)){
 }
 $resultat= generateRandomString();//j'ai enregistrer dans ma variable $resultat du return de la fonctiongenerateRandomString
  	 $requete = "INSERT INTO urls (url, url_genere) VALUES ('".$_POST['url']."', '".$resultat."')";// faire une requete d'insertion
-  	var_dump($requete);
+  	//var_dump($requete);
 
   	$bdd->query($requete) or die('erreur ');
 }
