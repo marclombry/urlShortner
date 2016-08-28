@@ -61,7 +61,10 @@
 
 </div>
 
-<div class="container">
+
+    <div class="container">
+    <a target="_blank" class="btn btn-success" href="http://localhost/urlShortner/graph.php">Statistiques des clicks</a>
+
     <?php
     $bdd = new PDO('mysql:host=localhost;port=3307;dbname=urlbase', 'root', '');
     $requete = $bdd->query("SELECT * FROM urls");
