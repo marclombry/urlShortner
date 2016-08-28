@@ -6,11 +6,13 @@
 
 // si il existe, je recupere l'url original(['url']), sinon je ne fait rien.
     if(isset($_GET['url_genere'])){
-        $requete = "SELECT url FROM urls WHERE url_genere = '".$_GET['url_genere']."'";
+        $requete = "SELECT url, clicks FROM urls WHERE url_genere = '".$_GET['url_genere']."'";
         $exec = $bdd->query($requete);
         $resultat = $exec->fetch();
 
         if (isset($resultat['url'])){
+            $sql = "UPDATE urls SET clicks = ".($resultat['clicks'] + 1)." WHERE url_genere = '".$_GET['url_genere']."'";
+            $bdd->query($sql);
             header('Location: ' . $resultat['url']);
         }
     }
