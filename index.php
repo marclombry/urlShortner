@@ -1,4 +1,5 @@
-<?php require_once('config.php');
+<?php
+require_once('config.php');
 
 // je verfie que lutilisateur a bien demander une url
 
@@ -16,7 +17,6 @@
             header('Location: ' .$resultat['url']);
         }
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,8 +64,7 @@
     <a target="_blank" class="btn btn-success" href="http://localhost/urlShortner/graph.php">Statistiques des clicks</a>
 
     <?php
-    $bdd = new PDO('mysql:host=localhost;port=3307;dbname=urlbase', 'root', '');
-    $requete = $bdd->query("SELECT * FROM urls");
+    $requete = $bdd->query("SELECT * FROM urls ORDER BY id DESC");
     ?>
     <table class="table">
         <thead>
