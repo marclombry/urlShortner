@@ -17,6 +17,15 @@ require_once('config.php');
             header('Location: ' .$resultat['url']);
         }
     }
+
+    if (isset($_POST['url'])) {
+        if ($_POST['url'] != "") {
+            //j'ai enregistrer dans ma variable $resultat du return de la fonctiongenerateRandomString
+            $resultat = generateRandomString();
+            $requete = "INSERT INTO urls (url, url_genere) VALUES ('".$_POST['url']."', '".$resultat."')";
+            $bdd->query($requete) or die('erreur ');
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,10 +55,10 @@ require_once('config.php');
     </div>
 
     <div class="container">
-        <form method="POST" action="traitement.php">
+        <form method="POST">
             <div class="form-group">
                 <label for="url">URL:</label>
-                <input type="url" name='url' class="form-control" id="url" placeholder="Enter un url">
+                <input required type="url" name='url' class="form-control" id="url" placeholder="Enter un url">
             </div>
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-default">Envoyer</button>
@@ -79,7 +88,7 @@ require_once('config.php');
             <tr class="success">
                 <td><?php echo $resultat['url'] ?></td>
                 <td>
-                    <a href="http://localhost/urlShortner/?url_genere=<?php echo $resultat['url_genere'] ?>"><?php echo $resultat['url_genere'] ?></a>
+                    <a target="_blank" href="http://localhost/urlShortner/?url_genere=<?php echo $resultat['url_genere'] ?>"><?php echo $resultat['url_genere'] ?></a>
                 <td>
                 <td><?php echo $resultat['clicks'] ?></td>
             </tr>
