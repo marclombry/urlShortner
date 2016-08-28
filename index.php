@@ -13,7 +13,7 @@
         if (isset($resultat['url'])){
             $sql = "UPDATE urls SET clicks = ".($resultat['clicks'] + 1)." WHERE url_genere = '".$_GET['url_genere']."'";
             $bdd->query($sql);
-            header('Location: ' . $resultat['url']);
+            header('Location: ' .$resultat['url']);
         }
     }
 
@@ -87,6 +87,7 @@
         </tbody>
     </table>
 </div>
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

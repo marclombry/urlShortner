@@ -1,6 +1,6 @@
 <?php
 
-//faire un tableau dans un tablo da da da da index prenom valeur alex
+//faire un tableau dans un tablo da da da da index prenom valeur marc
 
 $tab = array(
 	array(
@@ -9,7 +9,7 @@ $tab = array(
 				array(
 					'toto' => array(
 						array(
-							'prenom' => 'alex'
+							'prenom' => 'marc'
 							)
 						)
 					)

@@ -6,4 +6,9 @@ $credentials = [
     'username' => 'root',
     'password' => ''
 ];
-$bdd = new PDO('mysql:host='.$credentials['host'].';port='.$credentials['port'].';dbname='.$credentials['dbname'].'', $credentials['username'], $credentials['password']);
+
+try {
+	$bdd = new PDO('mysql:host='.$credentials['host'].';port='.$credentials['port'].';dbname='.$credentials['dbname'].'', $credentials['username'], $credentials['password']);
+} catch (Exception $e) {
+	echo $e->getMessage();
+}
