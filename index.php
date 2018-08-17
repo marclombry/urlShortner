@@ -7,12 +7,12 @@ require_once('config.php');
 
 // si il existe, je recupere l'url original(['url']), sinon je ne fait rien.
     if(isset($_GET['url_genere'])){
-        $requete = "SELECT url, clicks FROM urls WHERE url_genere = '".$_GET['url_genere']."'";
+        $requete = "SELECT url, clicks FROM urls WHERE url_genere = '".htmlspecialchars($_GET['url_genere'])."'";
         $exec = $bdd->query($requete);
         $resultat = $exec->fetch();
 
         if (isset($resultat['url'])){
-            $sql = "UPDATE urls SET clicks = ".($resultat['clicks'] + 1)." WHERE url_genere = '".$_GET['url_genere']."'";
+            $sql = "UPDATE urls SET clicks = ".(htmlspecialchars($resultat['clicks']) + 1)." WHERE url_genere = '".htmlspecialchars($_GET['url_genere'])."'";
             $bdd->query($sql);
             header('Location: ' .$resultat['url']);
         }
@@ -21,9 +21,11 @@ require_once('config.php');
     if (isset($_POST['url'])) {
         if ($_POST['url'] != "") {
             //j'ai enregistrer dans ma variable $resultat du return de la fonctiongenerateRandomString
+          
             $resultat = generateRandomString();
-            $requete = "INSERT INTO urls (url, url_genere) VALUES ('".$_POST['url']."', '".$resultat."')";
-            $bdd->query($requete) or die('erreur ');
+            $requete = "INSERT INTO urls (url, url_genere) VALUES ('".htmlspecialchars($_POST['url'])."', '".$resultat."')";
+           
+           $bdd->query($requete)or die('erreur ');
         }
     }
 ?>
